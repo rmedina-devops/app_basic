@@ -9,4 +9,4 @@ services:
     env_file:
       - .env
     volumes:
-      - ./env:app/.env:ro
+      - ./env:/app/.env:ro
