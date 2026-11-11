@@ -21,11 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v7
+      
+      - name: Set up Repo
+        uses: actions/checkout@v7
+      
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+      
       - name: Cache composer packages
         id: composer-cache
         uses: actions/cache@v6
@@ -34,7 +38,28 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('composer.lock') }}
           restore-keys: |
            ${{ runner.os }}-php-
+      
       - name: Installa dependencies
         run: composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader
+      
+      - name: Start up FrankenPHP
+        run: docker compose up --build -d
+
+      - name: Wait for app
+        run: |
+          for i in $(seq 1 30); do
+              if curl -ksf https://localhost/login > /dev/null; then
+                echo "App ready"; exit 0
+              fi
+              sleep 2
+            done
+            echo "App did not start"
+            docker compose logs
+            exit 1
+      
       - name: Run test suite
         run: composer test
+
+      - name: Stop app
+        if: always()
+        run: docker compose down
