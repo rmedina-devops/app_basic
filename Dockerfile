@@ -16,9 +16,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p /app/storage /app/cache \
-    && chmod -R www-data:www-data /app/storage /app/cache \
-    && chmod -R 777 /app/storage /app/cache
+COPY .env.example .env
 
 COPY --from=composer /app/vendor ./vendor
 
@@ -26,8 +24,8 @@ ARG USER=appuser
 
 RUN useradd ${USER} \
     && setcap CAP_NET_BIND_SERVICE=+ep /usr/local/bin/frankenphp \
-    && mkdir -p storage/cache/views storage/backups storage/logs \
-    && chown -R ${USER}:${USER} /data/caddy /config/caddy storage
+    && mkdir -p cache storage  \
+    && chown -R ${USER}:${USER} /data/caddy /config/caddy cache storage
 
 USER ${USER}
 
