@@ -66,6 +66,8 @@ jobs:
           curl -ks https://localhost/login || true
           echo "--- VENDOR / .ENV ---"
           docker compose exec -T app sh -c 'pwd; ls -la; ls vendor | head -5; ls -la .env' || true
+          docker compose -f compose.yml ps
+          docker compose -f compose.yml logs --tail=40
           exit 1
       
       - name: Run test suite
