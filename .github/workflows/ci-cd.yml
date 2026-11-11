@@ -62,6 +62,10 @@ jobs:
           curl -ksv https://localhost/login || true
           docker compose ps
           docker compose logs
+          echo "--- BODY ---"
+          curl -ks https://localhost/login || true
+          echo "--- VENDOR / .ENV ---"
+          docker compose exec -T app sh -c 'pwd; ls -la; ls vendor | head -5; ls -la .env' || true
           exit 1
       
       - name: Run test suite
