@@ -1,114 +1,80 @@
-# Template with FlightPHP
+# App Basic
 
-Plantilla base para aplicaciones web en PHP con **FlightPHP**, **Blade** (BladeOne), **PHPUnit** y **FrankenPHP**, lista para levantar con Docker.
+Aplicación básica diseñada exclusivamente para practicar, validar y demostrar procesos de Integración Continua (CI) y Despliegue Continuo (CD).
 
-## Stack
+## Objetivo
 
-| Pieza | Para qué |
-|---|---|
-| [FlightPHP](https://flightphp.com) | Micro-framework: rutas y capa HTTP |
-| [BladeOne](https://github.com/EFTEC/BladeOne) | Motor de plantillas Blade sin depender de Laravel |
-| [PHPUnit](https://phpunit.de) | Pruebas automatizadas |
-| [FrankenPHP](https://frankenphp.dev) | Servidor de aplicaciones PHP sobre Caddy |
-| [phpdotenv](https://github.com/vlucas/phpdotenv) | Variables de entorno desde `.env` |
+Este proyecto proporciona una aplicación mínima sobre la que se pueden construir y probar diferentes estrategias de automatización relacionadas con:
 
-## Requisitos
+- Continuous Integration (CI)
+- Continuous Delivery (CD)
+- Continuous Deployment
+- Quality Gates
+- Testing Automation
+- Containerización con Docker
+- GitHub Actions
+- Azure DevOps Pipelines
+- Despliegues en entornos Cloud
 
-- Docker y Docker Compose
-- (Opcional) PHP 8.2+ y Composer si quieres trabajar fuera del contenedor
+La lógica de negocio de la aplicación no es el foco principal. El objetivo es disponer de una base simple y estable para experimentar con flujos DevOps.
 
-## Inicio rápido
+## Casos de uso
 
-```bash
-git clone https://github.com/rmedina-devops/template-php.git
-cd template-php
-cp .env.example .env
-docker compose up -d --build
-```
+Este repositorio puede utilizarse para:
 
-Abre <https://localhost/>. Si el navegador avisa del certificado, es el autofirmado de Caddy en local.
+- Ejecutar pruebas automáticas en cada cambio.
+- Validar estándares de calidad de código.
+- Construir artefactos de forma automatizada.
+- Generar imágenes Docker.
+- Publicar versiones.
+- Automatizar despliegues hacia entornos de desarrollo, pruebas o producción.
+- Implementar estrategias GitFlow o Trunk-Based Development.
 
 ## Estructura del proyecto
 
-```
-.
-├── app
-│   ├── Views
-│   │   ├── layout/base.blade.php   # Layout principal
-│   │   └── welcome.blade.php       # Vista de ejemplo
-│   └── config
-│       ├── bootstrap.php           # Arranque: autoload, servicios y rutas
-│       ├── services.php            # Registro de servicios (Blade, dotenv)
-│       └── routes.php              # Definición de rutas
-├── public
-│   ├── css/styles.css              # Estáticos (document root)
-│   └── index.php                   # Punto de entrada
-├── storage                         # Caché de vistas compiladas
-├── tests                           # Pruebas PHPUnit
-├── Caddyfile                       # Configuración de FrankenPHP/Caddy
+```text
+app_basic/
+├── src/
+├── tests/
+├── .github/
+│   └── workflows/
 ├── Dockerfile
-├── compose.yml
-└── composer.json
+└── README.md
 ```
 
-## Cómo funciona
+> La estructura puede evolucionar según los ejercicios o desafíos CI/CD implementados.
 
-1. `public/index.php` carga `app/config/bootstrap.php` y llama a `start()`.
-2. `bootstrap.php` carga el autoload, registra los servicios (`services.php`) y las rutas (`routes.php`).
-3. Las rutas renderizan vistas con el helper `render`:
+## Flujo esperado
 
-```php
-Flight::route('/', function () {
-    Flight::render('welcome', ['title' => 'Inicio']);
-});
+```mermaid
+graph LR
+A[Commit] --> B[CI Pipeline]
+B --> C[Tests]
+C --> D[Build]
+D --> E[Artifact]
+E --> F[CD Pipeline]
+F --> G[Deployment]
 ```
 
-## Vistas con Blade
+## Tecnologías
 
-Las vistas viven en `app/Views` y se compilan en `storage/`. El layout base se extiende así:
+- Git
+- GitHub
+- GitHub Actions
+- Docker
+- DevOps Practices
 
-```blade
-@extends('layout.base')
+## Propósito educativo
 
-@section('title', 'Inicio')
+Este repositorio forma parte de una serie de laboratorios y desafíos prácticos orientados a fortalecer habilidades de:
 
-@section('content')
-    <h1>Hola desde Blade</h1>
-@endsection
-```
+- DevOps
+- CI/CD
+- Automatización
+- Observabilidad
+- Cloud Engineering
+- Platform Engineering
 
-## Archivos estáticos
+## Licencia
 
-El *document root* es `public/`, por lo que `public/css/styles.css` se referencia como:
-
-```html
-<link rel="stylesheet" href="/css/styles.css">
-```
-
-## Pruebas
-
-```bash
-composer test
-```
-
-Los tests cargan `app/config/bootstrap.php` sin llamar a `start()`, así puedes probar rutas y servicios sin levantar el servidor.
-
-## Variables de entorno
-
-| Variable | Descripción | Valores |
-|---|---|---|
-| `APP_ENV` | Entorno de ejecución | `development` / `production` |
-
-En `production` Blade usa modo `FAST` (no recompila vistas); en el resto usa `AUTO`.
-
-## Comandos útiles
-
-```bash
-docker compose up -d --build      # Levantar
-docker compose logs -f            # Ver logs
-docker compose down               # Apagar
-docker compose exec <servicio> composer test
-```
-
-## Author
-- Renzo Medina | DevOps & LMS Development
+Proyecto utilizado con fines educativos, demostrativos y de experimentación técnica.

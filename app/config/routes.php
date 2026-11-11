@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\AuthController;
+
 /**
  * This init project 
  */
@@ -10,3 +12,5 @@ $router->get("/", function(){
         'author'=> getenv('AUTHOR') ?: ' Demo'
     ]);
 });
+$router->get('/login',[AuthController::class, 'login']);
+$router->post('/validate',[AuthController::class,'validate']);
