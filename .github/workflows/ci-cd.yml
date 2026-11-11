@@ -44,21 +44,25 @@ jobs:
       
       - name: Create .env
         run: cp .env.example .env
-        
+
       - name: Start up FrankenPHP
         run: docker compose up --build -d
 
       - name: Wait for app
         run: |
           for i in $(seq 1 30); do
-              if curl -ksf https://localhost/login > /dev/null; then
-                echo "App ready"; exit 0
-              fi
-              sleep 2
-            done
-            echo "App did not start"
-            docker compose logs
-            exit 1
+            code=$(curl -ks -o /dev/null -w "%{http_code}" https://localhost/login || true)
+            echo "Intento $i: HTTP $code"
+            if [ "$code" = "200" ]; then
+              echo "App ready"; exit 0
+            fi
+            sleep 2
+          done
+          echo "App did not start"
+          curl -ksv https://localhost/login || true
+          docker compose ps
+          docker compose logs
+          exit 1
       
       - name: Run test suite
         run: composer test
