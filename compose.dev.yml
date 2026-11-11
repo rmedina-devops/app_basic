@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: sample_project
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    env_file:
+      - .env
