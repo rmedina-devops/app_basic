@@ -19,4 +19,11 @@ cache/
 # Build data
 /build/
 
+/storage/
+!/cache/.gitkeep
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
 # End of https://www.toptal.com/developers/gitignore/api/phpunit
