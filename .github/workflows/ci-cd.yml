@@ -44,6 +44,9 @@ jobs:
       
       - name: Create .env
         run: cp .env.example .env
+      
+      - name: Create folder cache
+        run: mkdir -p cache
 
       - name: Start up FrankenPHP
         run: docker compose up --build -d
