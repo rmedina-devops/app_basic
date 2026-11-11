@@ -16,6 +16,10 @@ WORKDIR /app
 
 COPY . /app
 
+RUN mkdir -p /app/storage /app/cache \
+    && chmod -R www-data:www-data /app/storage /app/cache \
+    && chmod -R 777 /app/storage /app/cache
+
 COPY --from=composer /app/vendor ./vendor
 
 ARG USER=appuser

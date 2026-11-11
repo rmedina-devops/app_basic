@@ -41,14 +41,6 @@ jobs:
       
       - name: Installa dependencies
         run: composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader
-      
-      - name: Create .env
-        run: cp .env.example .env
-      
-      - name: Create folder cache
-        run: | 
-          mkdir -p storage cache
-          chmod -R 777 storage cache
 
       - name: Start up FrankenPHP
         run: docker compose up --build -d
