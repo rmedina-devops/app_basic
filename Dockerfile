@@ -16,8 +16,6 @@ WORKDIR /app
 
 COPY . /app
 
-COPY .env.example .env
-
 COPY --from=composer /app/vendor ./vendor
 
 ARG USER=appuser

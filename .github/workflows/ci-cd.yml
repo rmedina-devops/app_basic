@@ -41,6 +41,9 @@ jobs:
       
       - name: Installa dependencies
         run: composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader
+      
+      - name: Create .env
+        run: cp .env.example .env
 
       - name: Start up FrankenPHP
         run: docker compose up --build -d
