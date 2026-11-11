@@ -94,6 +94,10 @@ jobs:
         uses: docker/setup-buildx-action@v4
       
       - name: Get tag
+        env:
+          REF_TYPE: ${{github.ref_type}}
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          echo ${{ steps.meta.outputs.tags }}
-          echo ${{ steps.meta.outputs.labels }}
+          echo "Tipo de referencia : $REF_TYPE"
+          echo "Nombre : $REF_NAME"
+          echo "Versión sin la v : ${REF_NAME#v}"
