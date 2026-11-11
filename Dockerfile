@@ -22,8 +22,8 @@ ARG USER=appuser
 
 RUN useradd ${USER} \
     && setcap CAP_NET_BIND_SERVICE=+ep /usr/local/bin/frankenphp \
-    && mkdir -p cache storage  \
-    && chown -R ${USER}:${USER} /data/caddy /config/caddy cache storage
+    && mkdir -p storage/ cache/ \
+    && chown -R ${USER}:${USER} /data/caddy /config/caddy storage
 
 USER ${USER}
 
