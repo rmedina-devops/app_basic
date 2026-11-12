@@ -4,6 +4,11 @@
 All notable changes to this project will be documented in this file.
 <!-- END HEADER -->
 
+## [1.0.5](https://github.com/rmedina-devops/app_basic/compare/v1.0.4...v1.0.5) (2026-11-12)
+
+
+---
+
 ## [1.0.4](https://github.com/rmedina-devops/app_basic/compare/v1.0.3...v1.0.4) (2026-11-12)
 
 ### Features
