@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!-- END HEADER -->
 
+## [1.0.4](https://github.com/rmedina-devops/app_basic/compare/v1.0.3...v1.0.4) (2026-11-12)
+
+### Features
+
+* Create .env for image ([c33523](https://github.com/rmedina-devops/app_basic/commit/c335237b589576d143f7cc79c91abd7ebe210d97))
+
+
+---
+
 ## [1.0.3](https://github.com/rmedina-devops/app_basic/compare/v1.0.2...v1.0.3) (2026-11-12)
 
 ### Bug Fixes
