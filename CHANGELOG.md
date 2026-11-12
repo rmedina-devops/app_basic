@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!-- END HEADER -->
 
+## [1.0.3](https://github.com/rmedina-devops/app_basic/compare/v1.0.2...v1.0.3) (2026-11-12)
+
+### Bug Fixes
+
+* Modified tag to upload image ([93ae1c](https://github.com/rmedina-devops/app_basic/commit/93ae1cf6f1edc04f82f586a37869e58b34388649))
+
+
+---
+
 ## [1.0.2](https://github.com/rmedina-devops/app_basic/compare/v1.0.1...v1.0.2) (2026-11-11)
 
 ### Features

@@ -32,5 +32,5 @@
         "phpunit/phpunit": "^12.5",
         "marcocesarato/php-conventional-changelog": "^1.17"
     },
-    "version": "1.0.2"
+    "version": "1.0.3"
 }
