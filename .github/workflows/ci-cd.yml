@@ -94,7 +94,15 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           REPO_NAME: ${{ github.event.repository.name }}
-        run: echo "name=${DOCKER_USER,,}/${REPO_NAME,,}" >> "$GITHUB_OUTPUT"
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          if [ -z "$DOCKER_USER" ]; then
+            echo "Falta la variable DOCKER_USERNAME (Settings > Secrets and variables > Actions > Variables)"
+            exit 1
+          fi
+          REF="${DOCKER_USER,,}/${REPO_NAME,,}:${TAG_NAME#v}"
+          echo "Imagen: $REF"
+          echo "ref=$REF" >> "$GITHUB_OUTPUT"
 
       - name: Docker metadata
         uses: docker/metadata-action@v6
@@ -125,5 +133,4 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.image.outputs.ref }}

@@ -78,3 +78,6 @@ Este repositorio forma parte de una serie de laboratorios y desafíos prácticos
 ## Licencia
 
 Proyecto utilizado con fines educativos, demostrativos y de experimentación técnica.
+
+## Autor
+- Renzo Medina | DevOps & Desarrollador LMS
