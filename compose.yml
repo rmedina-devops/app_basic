@@ -3,6 +3,14 @@ services:
     build: .
     container_name: sample_project
     ports:
-      - "8080:80"
+      - "${HTTP_PORT:-80}:80"
       - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data        # certificados: sin esto se pierden al recrear el contenedor
+      - caddy_config:/config
     restart: unless-stopped
+  
+volumes:
+  caddy_data:
+  caddy_config:
